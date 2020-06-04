@@ -18,13 +18,18 @@ After that, feel free to start creating commands:
 ## Example command class:
 ```
 <?php
+
 namespace Cmds\Shell;
+
 use Cmds\Interfaces\CmdInterface;
 use Cmds\Traits\CmdTrait;
+
 class CreateShell extends BaseCmd implements CmdInterface
 {
     use CmdTrait;
+    
     public string $signature = 'create:shell';
+    
     public function cmdArgs(): array
     {
         return [
@@ -32,6 +37,7 @@ class CreateShell extends BaseCmd implements CmdInterface
             '--path=' => 'Default path is location of this file, set this to override it.',
         ];
     }
+    
     public function execute(): void
     {
         $args = $this->getArgs();
@@ -49,6 +55,7 @@ class CreateShell extends BaseCmd implements CmdInterface
             print "Class already exists, use a new name.\n";
             exit(1);
         }
+        
         $fd = fopen($file, 'x');
         fwrite($fd, $classT);
         fclose($fd);
