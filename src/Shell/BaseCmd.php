@@ -1,6 +1,6 @@
 <?php
 
-namespace Cmds\Shell;
+namespace SCF\Shell;
 
 class BaseCmd
 {
@@ -8,7 +8,8 @@ class BaseCmd
 
     /**
      * This method should be overwritten in shell if args are available
-     *
+     * 
+     * @return array
      */
     public function cmdArgs(): array 
     {
@@ -17,15 +18,24 @@ class BaseCmd
 
     /**
      * Prints red text
+     * 
+     * @param string $s msg
+     * 
+     * @return void
      */
     public function error(string $s): void
     {
-	$l = strlen($s);
+        $l = strlen($s);
         print "\033[01;31m" . $s . "\033[0m";
     }
 
     /**
-     * Prints yellow text                                                                                                    */
+     * Prints yellow text  
+     * 
+     * @param string $s msg
+     * 
+     * @return void
+     */
     public function warn(string $s): void
     {
         $l = strlen($s);
@@ -34,6 +44,10 @@ class BaseCmd
 
     /**
      * Prints green text
+     * 
+     * @param string $s msg
+     * 
+     * @return void
      */
     public function success(string $s): void
     {

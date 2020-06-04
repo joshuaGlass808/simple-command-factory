@@ -1,6 +1,6 @@
 <?php
 
-namespace Cmds\Interfaces;
+namespace SCF\Interfaces;
 
 interface CmdInterface 
 {

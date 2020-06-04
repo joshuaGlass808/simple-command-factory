@@ -3,13 +3,16 @@
     "type": "framework",
     "keywords": [
         "framework",
-	"commands",
-	"php-cmd"
+        "commands",
+        "php-cmd",
+        "simple command framework",
+        "scf"
     ],
     "autoload": {
         "psr-4": {
-	    "Cmds\\": "src/"
-	}
+            "App\\": "app/",
+            "SCF\\": "src/"
+        }
     },
     "require": {},
     "prefer-stable": true
