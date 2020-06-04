@@ -1,0 +1,16 @@
+{
+    "name": "joshuaglass808/php-cmd",
+    "type": "framework",
+    "keywords": [
+        "framework",
+	"commands",
+	"php-cmd"
+    ],
+    "autoload": {
+        "psr-4": {
+	    "Cmds\\": "src/"
+	}
+    },
+    "require": {},
+    "prefer-stable": true
+}
