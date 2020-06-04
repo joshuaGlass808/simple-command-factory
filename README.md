@@ -12,7 +12,7 @@ composer install
 
 After that, feel free to start creating commands:
 ```
-./scf create:shell --shell-name='MyCommand' --signature='custom:signature:block'
+./scf create:shell --shell-name='ExampleCommand' --signature='print:message'
 ```
 
 ## Example command class:
