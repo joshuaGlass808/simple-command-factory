@@ -1,7 +1,7 @@
-# PHP-CMD
-php-cmd is a lite cli helper. It comes with a command to help boilerplate the creation of more commands.
+# Simple Command Framework
+scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
 This was inspired by Laravels Artisan command and the Symfony Command line packages as well. I set out to
-try and make my own cli helper (framework?), but with as little to no dependencies.
+try and make my own cli helper (framework?), but with no dependencies. Due to that scf has missing features like bindings with ncurses or a graphing/loading library.
 
 ## Install:
 ```
@@ -12,73 +12,79 @@ composer install
 
 After that, feel free to start creating commands:
 ```
-./php-cmd create:shell --shell-name='MyCommandsClassname'
+./scf create:shell --shell-name='MyCommand' --signature='custom:signature:block'
 ```
 
 ## Example command class:
+This repo ships with an example command already set up in the `App\Commands` namespace.
+Feel free to use it!
+
 ```
 <?php
 
-namespace Cmds\Shell;
+namespace App\Commands;
 
-use Cmds\Interfaces\CmdInterface;
-use Cmds\Traits\CmdTrait;
+use SCF\Interfaces\CmdInterface;
+use SCF\Shell\BaseCmd;
+use SCF\Traits\CmdTrait;
 
-class CreateShell extends BaseCmd implements CmdInterface
+class ExampleCommand extends BaseCmd implements CmdInterface
 {
     use CmdTrait;
-    
-    public string $signature = 'create:shell';
-    
-    public function cmdArgs(): array
+
+    public string $signature = 'print:message';
+
+    /**
+     * Method is used to correctly parse the args in the 
+     *  commandline and for the help message.
+     */
+    public function cmdArgs(): array 
     {
         return [
-            '--shell-name=' => 'Name of the Shell you wish to create.',
-            '--path=' => 'Default path is location of this file, set this to override it.',
+            '--message=' => 'Message to be printed'
         ];
     }
-    
+
+    /**
+     * Method called to run the command.
+     */
     public function execute(): void
     {
-        $args = $this->getArgs();
-        $class = $args['shell-name'];
-        $classT = "<?php\n\nnamespace Cmds\Shell;\n\n"
-            . "use Cmds\\Interfaces\\CmdInterface;\n"
-            . "use Cmds\\Traits\\CmdTrait;\n\n"
-            . "class {$class} extends BaseCmd implements CmdInterface\n"
-            . "{\n    use CmdTrait;\n\n"
-            . "    public function execute(): void\n"
-            . "    {\n        // Get started!\n    }\n}\n";
-        $path = $args['path'] ?? "/src/Shell";
-        $file = getcwd() . "{$path}/{$class}.php";
-        if (file_exists($file)) {
-            print "Class already exists, use a new name.\n";
-            exit(1);
-        }
-        
-        $fd = fopen($file, 'x');
-        fwrite($fd, $classT);
-        fclose($fd);
-        print "New class ({$class}) create: {$file}\n";
-        print "Don't forget to add {$class} to the Cmds/Kernel class.\n";
+        // Get started!
+        $this->success($this->getArgs()['message'] . "\n");
     }
 }
+```
+Before we can use this, make sure we register it in `App\Kernel`.
+In Kernel.php:
+```
+use App\Commands\ExampleCommand;
+```
+...
+```
+    public static function classes(): array
+    {
+        return [
+            ExampleCommand::class,
+        ];
+    }
 ```
 
 ## Example usage:
 ```
-./php-cmd -h
-./php-cmd --help
-./php-cmd create:shell --shell-name='DesktopImageRotator'
+./scf -h
+./scf --help
+./scf create:shell --shell-name='DesktopImageRotator'
 
 ```
 Once you register that new shells in the Kernel you will be able to see them inside of the help message
 
 ## Example help:
 ```
-./php-cmd -h
-Usage: ./php-cmd <shell:signature> [--args=...]
-       ./php-cmd -h
+./scf -h
+Usage: ./scf <shell:signature> [--args=...]
+       ./scf -h
+
     create:shell
         --shell-name= : Name of the Shell you wish to create.
         --path= : Default path is location of this file, set this to override it.

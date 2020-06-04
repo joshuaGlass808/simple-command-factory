@@ -1,9 +1,9 @@
 <?php
 
-namespace Cmds\Shell;
+namespace SCF\Shell;
 
-use Cmds\Interfaces\CmdInterface;
-use Cmds\Traits\CmdTrait;
+use SCF\Interfaces\CmdInterface;
+use SCF\Traits\CmdTrait;
 
 class CreateShell extends BaseCmd implements CmdInterface
 {
@@ -11,39 +11,64 @@ class CreateShell extends BaseCmd implements CmdInterface
 
     public string $signature = 'create:shell';
 
+    /**
+     * Set Command arguments
+     * 
+     * @return array
+     */
     public function cmdArgs(): array 
     {
         return [
-	    '--shell-name=' => 'Name of the Shell you wish to create.',
-	    '--path=' => 'Default path is location of this file, set this to override it.',
-	];
+            '--path=' => 'override default path (app/Commands/).',
+            '--shell-name=' => 'Name of the Shell you wish to create.',
+            '--signature=' => 'override default signature',
+	    ];
     }
 
+    /**
+     * Execute Command = Creates a new Command Class file.
+     * 
+     * @return void
+     */
     public function execute(): void
     {
-	$args = $this->getArgs();
+        $args = $this->getArgs();
         $class = $args['shell-name'];
-	$classT = "<?php\n\nnamespace Cmds\Shell;\n\n"
-	    . "use Cmds\\Interfaces\\CmdInterface;\n"
-            . "use Cmds\\Traits\\CmdTrait;\n\n"
-	    . "class {$class} extends BaseCmd implements CmdInterface\n"
-	    . "{\n    use CmdTrait;\n\n"
-	    . "    public function execute(): void\n"
-	    . "    {\n        // Get started!\n    }\n}\n";
+        $path = $args['path'] ?? "/app/Commands";
+        $file = getcwd() . "{$path}/{$class}.php";
+        $this->warn("Building file: {$file}\n");
 
-	$path = $args['path'] ?? "/src/Shell";
-	$file = getcwd() . "{$path}/{$class}.php";
+        if (file_exists($file)) {
+            print "Class already exists, use a new name.\n";
+            exit(1);
+        }
 
-	if (file_exists($file)) {
-	    print "Class already exists, use a new name.\n";
-	    exit(1);
-	}
+        $fd = fopen($file, 'x');
+        fwrite($fd, $this->getClassTemplate($class, $args['signature']));
+        fclose($fd);
 
-	$fd = fopen($file, 'x');
-        fwrite($fd, $classT);
-	fclose($fd);
-
-	print "New class ({$class}) create: {$file}\n";
-	print "Don't forget to add {$class} to the Cmds/Kernel class.\n";
+        $this->success("New class ({$class}) create: {$file}\n");
+        $this->warn("Don't forget to add {$class} to the App/Kernel class.\n");
+    }
+	
+    /**
+     * Returns the class template as a string.
+     * 
+     * @param string $class - Class namespace of running command.
+     * @param null|string $signature - Class signature.
+     * 
+     * @return string
+     */
+    protected function getClassTemplate(string $class, ?string $signature): string 
+    {
+        return "<?php\n\nnamespace App\Commands;\n\n"
+            . "use SCF\\Interfaces\\CmdInterface;\n"
+            . "use SCF\\Shell\\BaseCmd;\n"
+            . "use SCF\\Traits\\CmdTrait;\n\n"
+            . "class {$class} extends BaseCmd implements CmdInterface\n"
+            . "{\n    use CmdTrait;\n\n"
+            . "    public string \$signature = '" . $signature . "';\n\n"
+            . "    public function execute(): void\n"
+            . "    {\n        // Get started!\n    }\n}\n";
     }
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 /*
@@ -11,7 +11,7 @@
 require_once 'vendor/autoload.php';
 
 if ($argc < 2) {
-    print('Incorrect amount of arguments / command declaration');
+    print 'Incorrect amount of arguments / command declaration';
     exit(2);
 }
 
@@ -19,7 +19,7 @@ if ($argc < 2) {
 $_ = array_shift($argv);
 $command = array_shift($argv);
 if (preg_match('/^(--help|-h)$/i', $command)) {
-    \Cmds\Kernel::printHelp();
+    \App\Kernel::printHelp();
     print "Options:\n    --help|-h : Display this help message.\n";
     exit(0);
 }
@@ -28,12 +28,12 @@ if (count($argv) === 0) {
     $argv = null;
 }
 
-$class = \Cmds\Kernel::getCommandClass($command, $argv);
+$class = \App\Kernel::getCommandClass($command, $argv);
 if ($class === null) {
     printf(
         "The command: %s is not a valid command listed in the %s class or a valid option.\n", 
-	$command, 
-	\Cmds\Kernel::class
+        $command, 
+        \App\Kernel::class
     );
     exit(3);
 }
