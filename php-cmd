@@ -1,0 +1,43 @@
+#!/usr/bin/php
+<?php
+
+/*
+ * Exit codes:
+ *  0 - Success
+ *  1 - Unknown
+ *  2 - Incorrect amount of arguments
+ *  3 - Invalid Command
+ */
+require_once 'vendor/autoload.php';
+
+if ($argc < 2) {
+    print('Incorrect amount of arguments / command declaration');
+    exit(2);
+}
+
+// Don't need the first element.
+$_ = array_shift($argv);
+$command = array_shift($argv);
+if (preg_match('/^(--help|-h)$/i', $command)) {
+    \Cmds\Kernel::printHelp();
+    print "Options:\n    --help|-h : Display this help message.\n";
+    exit(0);
+}
+
+if (count($argv) === 0) {
+    $argv = null;
+}
+
+$class = \Cmds\Kernel::getCommandClass($command, $argv);
+if ($class === null) {
+    printf(
+        "The command: %s is not a valid command listed in the %s class or a valid option.\n", 
+	$command, 
+	\Cmds\Kernel::class
+    );
+    exit(3);
+}
+
+$class->execute();
+
+
