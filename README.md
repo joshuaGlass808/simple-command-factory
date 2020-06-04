@@ -94,3 +94,16 @@ Usage: ./scf <shell:signature> [--args=...]
 Options:
     --help|-h : Display this help message.
 ```
+
+## Documentation
+Somethings that may not have been shown in the examples above:
+* Colored text in command classes
+    * `$this->warn('Outputs yellow text');`
+    * `$this->success('Outputs green text');`
+    * `$this->error('Outputs red text');`
+
+## Coming Soon
+* Parameters added to output functions to also send messages to log files.
+    * Possible Example: `$this->error($text, $logFilePath, self::APPEND|self::OVERWRITE);`
+* Add ability to use more colors if wanted:
+    * Possible example: `$this->output('Some text to display', SCF\Styles\Output::BLUE);`
