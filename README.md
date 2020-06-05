@@ -4,24 +4,24 @@ This was inspired by Laravels Artisan command and the Symfony Command line packa
 try and make my own cli helper (framework?), but with no dependencies outside of php. Due to that scf has missing features like bindings with ncurses or a graphing/loading library.
 
 ## Install:
-```
+```bash
 git clone https://github.com/joshuaGlass808/simple-command-framework.git
 cd simple-command-framework/
 composer install
 ```
 
 After that, feel free to start creating commands:
-```
+```sh
 ./scf create:shell --shell-name='ExampleCommand' --signature='print:message'
 ```
 Running the command above will result in this output:
-```
+```sh
 Building file: simple-command-framework/app/Commands/ExampleCommand.php
 New class (test) create: simple-command-framework/app/Commands/ExampleCommand.php
 Don't forget to add ExampleCommand to the App/Kernel class.
 ```
 Which creates a file like this:
-```
+```php
 <?php
 
 namespace App\Commands;
@@ -45,8 +45,7 @@ class ExampleCommand extends BaseCmd implements CmdInterface
 ## Example command class:
 This repo ships with an example command already set up in the `App\Commands` namespace.
 Feel free to use it!
-
-```
+```php
 <?php
 
 namespace App\Commands;
@@ -88,11 +87,11 @@ class ExampleCommand extends BaseCmd implements CmdInterface
 ```
 Before we can use this, make sure we register it in `App\Kernel`.
 In Kernel.php:
-```
+```php
 use App\Commands\ExampleCommand;
 ```
 ...
-```
+```php
     public static function classes(): array
     {
         return [
@@ -102,7 +101,7 @@ use App\Commands\ExampleCommand;
 ```
 
 ## Example usage:
-```
+```sh
 ./scf -h
 ./scf --help
 ./scf create:shell --shell-name='DesktopImageRotator'
@@ -118,7 +117,7 @@ use App\Commands\ExampleCommand;
 Once you register that new shells in the Kernel you will be able to see them inside of the help message
 
 ## Example help:
-```
+```sh
 $ ./scf -h
 Usage: ./scf <shell:signature> [--args=...]
        ./scf -h
