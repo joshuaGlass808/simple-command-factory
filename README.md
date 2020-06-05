@@ -18,7 +18,7 @@ Running the command above will result in this output:
 ```
 Building file: php-cmd/app/Commands/ExampleCommand.php
 New class (test) create: php-cmd/app/Commands/ExampleCommand.php
-Don't forget to add test to the App/Kernel class.
+Don't forget to add ExampleCommand to the App/Kernel class.
 ```
 Which creates a file like this:
 ```
