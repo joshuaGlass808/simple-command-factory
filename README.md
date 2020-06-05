@@ -111,7 +111,7 @@ use App\Commands\ExampleCommand;
 #
 # OUTPUT: hello world
 
-# without the --show flag (apart of the command args), show will default to false and not show the message
+# without the --show flag, show will default to false and not show the message
 ./scf print:message --message='hello world'
 
 ```
