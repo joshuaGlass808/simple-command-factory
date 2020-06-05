@@ -116,3 +116,9 @@ Somethings that may not have been shown in the examples above:
     * Possible Example: `$this->error($text, $logFilePath, self::APPEND|self::OVERWRITE);`
 * Add ability to use more colors if wanted:
     * Possible example: `$this->output('Some text to display', SCF\Styles\Output::BLUE);`
+* A storage directory for keeping anything from cache to command logs.
+    * I think it will ship with an empty directory structure and a starter log.
+    * when logs are written, it will be written like `scf-<date>.log`. Example: `../storage/logs/scf-20200604.log` (log for June 4th, 2020)
+        * Possible config to change the date structure on the files.
+        
+* Create a `config/` directory and keep config files for specific services, or for future add ons.
