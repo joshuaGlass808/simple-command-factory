@@ -1,7 +1,7 @@
 # Simple Command Framework
 scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
 This was inspired by Laravels Artisan command and the Symfony Command line packages as well. I set out to
-try and make my own cli helper (framework?), but with no dependencies. Due to that scf has missing features like bindings with ncurses or a graphing/loading library.
+try and make my own cli helper (framework?), but with no dependencies outside of php. Due to that scf has missing features like bindings with ncurses or a graphing/loading library.
 
 ## Install:
 ```
@@ -41,7 +41,8 @@ class ExampleCommand extends BaseCmd implements CmdInterface
     public function cmdArgs(): array 
     {
         return [
-            '--message=' => 'Message to be printed'
+            '--message=' => 'Message to be printed',
+            '--show'     => 'For boolean style flags, leave out the = at the end. Default is false unless used'
         ];
     }
 
@@ -51,7 +52,10 @@ class ExampleCommand extends BaseCmd implements CmdInterface
     public function execute(): void
     {
         // Get started!
-        $this->success($this->getArgs()['message'] . "\n");
+        $args = $this->getArgs();
+        if ($args['show']) {
+            $this->success($args['message'] . "\n");
+        }
     }
 }
 ```
@@ -76,20 +80,25 @@ use App\Commands\ExampleCommand;
 ./scf --help
 ./scf create:shell --shell-name='DesktopImageRotator'
 
+./scf print:message --message='hello world' --show
+#
+# OUTPUT: hello world
+
+# without the --show flag (apart of the command args), show will default to false and not show the message
+./scf print:message --message='hello world'
+
 ```
 Once you register that new shells in the Kernel you will be able to see them inside of the help message
 
 ## Example help:
 ```
-./scf -h
+$ ./scf -h
 Usage: ./scf <shell:signature> [--args=...]
        ./scf -h
 
-    create:shell
-        --shell-name= : Name of the Shell you wish to create.
-        --path= : Default path is location of this file, set this to override it.
-
-    desktop:image:rotation
+    print:message
+        --message= : Message to be printed
+        --show : For boolean style flags, leave out the = at the end. Default is false unless used
 
 Options:
     --help|-h : Display this help message.

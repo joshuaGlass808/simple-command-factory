@@ -16,9 +16,25 @@ trait CmdTrait
 
         foreach ($this->args as $arg) {
             $argParsed = explode('=', $arg);
-            if (in_array($argParsed[0] . '=', $keys)) {
-                $args[str_replace('--', '', $argParsed[0])] = $argParsed[1];
+            $key = array_shift($argParsed);
+            if (in_array($key . '=', $keys)) {
+                // imploding with = incase they used the = in the arguments string.
+                $args[str_replace('--', '', $key)] = implode('=', $argParsed);
             }
+
+            if (in_array($key, $keys)) {
+                $args[str_replace('--', '', $key)] = true;
+            }
+        }
+
+        // Defaulting all boolean args to false if they are not set.
+        foreach ($keys as $key) {
+            $cleanKey = str_replace('--', '', $key);
+            if ($key[strlen($key)-1] === '=' || isset($args[$cleanKey])) {
+                continue;
+            }
+
+            $args[$cleanKey] = false;
         }
 
         return $args;

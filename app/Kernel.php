@@ -11,18 +11,26 @@ use SCF\Shell\{
 
 class Kernel
 {
+	/**
+	 * Register Commands here.
+	 */
+	const COMMANDS = [
+		ExampleCommand::class,
+	];
+
     /**
      * Classes is a method were you register all the command classes.
      * They be from any namespace as long as they implement 
-     *   extend BaseCmd and have an execute method
+     *   extend BaseCmd and have an execute method.
      * 
      * @return array - an array of all registered commands.
      */
     public static function classes(): array
     {
-        return [
-            ExampleCommand::class,
-        ];
+		$commands = self::COMMANDS;
+		$commands[] = CreateShell::class;
+		
+		return $commands;
     }
 	
     /**
@@ -35,10 +43,6 @@ class Kernel
     public static function getCommandClass(string $signature, ?array $args): ?BaseCmd
     {
         $classes = self::classes();
-        // I don't want CreateShell to be accidentally removed.
-        // I felt it was a useful command. If programmer doesn't like it,
-        // feel free to remove from commands lists.
-        $classes[] = CreateShell::class;
         $classSignatures = [];
         foreach ($classes as $class) {	    
             if ((new $class)->signature === $signature) {
@@ -64,7 +68,8 @@ class Kernel
         $classes = self::classes();
         print "Usage: ./scf <shell:signature> [--args=...]\n"
             . "       ./scf -h\n\n";
-
+		
+        rsort($classes);
         foreach ($classes as $class) {
             $c = new $class;
             $s = '    ';
