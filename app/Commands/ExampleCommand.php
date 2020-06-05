@@ -19,7 +19,8 @@ class ExampleCommand extends BaseCmd implements CmdInterface
     public function cmdArgs(): array 
     {
         return [
-            '--message=' => 'Message to be printed'
+            '--message=' => 'Message to be printed',
+            '--show'     => 'For boolean style flags, leave out the = at the end. Default is false unless used'
         ];
     }
 
@@ -29,6 +30,9 @@ class ExampleCommand extends BaseCmd implements CmdInterface
     public function execute(): void
     {
         // Get started!
-        $this->success($this->getArgs()['message'] . "\n");
+        $args = $this->getArgs();
+        if ($args['show']) {
+            $this->success($args['message'] . "\n");
+        }
     }
 }

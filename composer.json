@@ -1,11 +1,11 @@
 {
-    "name": "joshuaglass808/php-cmd",
+    "name": "joshuaglass808/scf",
     "type": "framework",
+    "homepage": "https://github.com/joshuaGlass808/php-cmd",
     "keywords": [
         "framework",
         "commands",
         "php-cmd",
-        "simple command framework",
         "scf"
     ],
     "autoload": {
@@ -14,6 +14,8 @@
             "SCF\\": "src/"
         }
     },
-    "require": {},
+    "require": {
+        "php": "^7.4"
+    },
     "prefer-stable": true
 }
