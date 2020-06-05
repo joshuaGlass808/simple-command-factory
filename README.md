@@ -5,8 +5,8 @@ try and make my own cli helper (framework?), but with no dependencies outside of
 
 ## Install:
 ```
-git clone https://github.com/joshuaGlass808/php-cmd.git
-cd php-cmd/
+git clone https://github.com/joshuaGlass808/simple-command-framework.git
+cd simple-command-framework/
 composer install
 ```
 
@@ -16,8 +16,8 @@ After that, feel free to start creating commands:
 ```
 Running the command above will result in this output:
 ```
-Building file: php-cmd/app/Commands/ExampleCommand.php
-New class (test) create: php-cmd/app/Commands/ExampleCommand.php
+Building file: simple-command-framework/app/Commands/ExampleCommand.php
+New class (test) create: simple-command-framework/app/Commands/ExampleCommand.php
 Don't forget to add ExampleCommand to the App/Kernel class.
 ```
 Which creates a file like this:
