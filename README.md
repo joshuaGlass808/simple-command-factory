@@ -144,4 +144,5 @@ Somethings that may not have been shown in the examples above:
 ## Coming Soon     
 * Create a `config/` directory and keep config files for specific services, or for future add ons.
 * Create support for reading .env files so can create a .gitignored key/value pair file.
+* A way to set command line arguments as required and some sort of type inforcer to some extent.
 * Build in Test support / some example tests testing the framework.
