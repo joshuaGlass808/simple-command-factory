@@ -130,12 +130,16 @@ Options:
 
 ## Documentation
 Somethings that may not have been shown in the examples above:
+
+![demo](https://user-images.githubusercontent.com/10493764/84108904-35448580-a9d6-11ea-8fd3-cb435d6baa4d.png)
+
 * Colored text in command classes
     * `$this->output('string', TextColor::CYAN);`
     * `$this->warn('Outputs yellow text');`
     * `$this->success('Outputs green text');`
     * `$this->error('Outputs red text');`
     * `$this->error('String', true); // True will log the string as well`
+
 
 ## Coming Soon     
 * Create a `config/` directory and keep config files for specific services, or for future add ons.
