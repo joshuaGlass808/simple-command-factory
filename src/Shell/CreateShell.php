@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace SCF\Shell;
 
@@ -9,21 +9,12 @@ class CreateShell extends BaseCmd implements CmdInterface
 {
     use CmdTrait;
 
-    public string $signature = 'create:shell';
-
-    /**
-     * Set Command arguments
-     * 
-     * @return array
-     */
-    public function cmdArgs(): array 
-    {
-        return [
-            '--path=' => 'override default path (app/Commands/).',
-            '--shell-name=' => 'Name of the Shell you wish to create.',
-            '--signature=' => 'override default signature',
-	    ];
-    }
+	public string $signature = 'create:shell';
+	public array $argumentMap = [
+		'--path=' => 'override default path (app/Commands/).',
+		'--shell-name=' => 'Name of the Shell you wish to create.',
+		'--signature=' => 'override default signature',
+	];
 
     /**
      * Execute Command = Creates a new Command Class file.
@@ -61,13 +52,14 @@ class CreateShell extends BaseCmd implements CmdInterface
      */
     protected function getClassTemplate(string $class, ?string $signature): string 
     {
-        return "<?php\n\nnamespace App\Commands;\n\n"
+        return "<?php declare(strict_types=1);\n\nnamespace App\Commands;\n\n"
             . "use SCF\\Interfaces\\CmdInterface;\n"
             . "use SCF\\Shell\\BaseCmd;\n"
             . "use SCF\\Traits\\CmdTrait;\n\n"
             . "class {$class} extends BaseCmd implements CmdInterface\n"
             . "{\n    use CmdTrait;\n\n"
-            . "    public string \$signature = '" . $signature . "';\n\n"
+			. "    public string \$signature = '" . $signature . "';\n"
+			. "    public array \$argumentMap = [];\n\n"
             . "    public function execute(): void\n"
             . "    {\n        // Get started!\n    }\n}\n";
     }

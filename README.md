@@ -35,6 +35,7 @@ class ExampleCommand extends BaseCmd implements CmdInterface
     use CmdTrait;
 
     public string $signature = 'print:message';
+    public array $argumentMap = [];
 
     public function execute(): void
     {
@@ -46,31 +47,24 @@ class ExampleCommand extends BaseCmd implements CmdInterface
 This repo ships with an example command already set up in the `App\Commands` namespace.
 Feel free to use it!
 ```php
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Commands;
 
 use SCF\Interfaces\CmdInterface;
 use SCF\Shell\BaseCmd;
 use SCF\Traits\CmdTrait;
+use SCF\Styles\TextColor;
 
 class ExampleCommand extends BaseCmd implements CmdInterface
 {
     use CmdTrait;
 
     public string $signature = 'print:message';
-
-    /**
-     * Method is used to correctly parse the args in the 
-     *  commandline and for the help message.
-     */
-    public function cmdArgs(): array 
-    {
-        return [
-            '--message=' => 'Message to be printed',
-            '--show'     => 'For boolean style flags, leave out the = at the end. Default is false unless used'
-        ];
-    }
+    public array $argumentMap = [
+        '--message=' => 'Message to be printed',
+        '--show'     => 'For boolean style flags, leave out the = at the end. Default is false unless used'
+    ];
 
     /**
      * Method called to run the command.
@@ -78,10 +72,14 @@ class ExampleCommand extends BaseCmd implements CmdInterface
     public function execute(): void
     {
         // Get started!
+        $start = microtime(true);
         $args = $this->getArgs();
         if ($args['show']) {
+            $start = microtime(true);
             $this->success($args['message'] . "\n");
         }
+        $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextColor::CYAN);
+
     }
 }
 ```
@@ -133,18 +131,13 @@ Options:
 ## Documentation
 Somethings that may not have been shown in the examples above:
 * Colored text in command classes
+    * `$this->output('string', TextColor::CYAN);`
     * `$this->warn('Outputs yellow text');`
     * `$this->success('Outputs green text');`
     * `$this->error('Outputs red text');`
+    * `$this->error('String', true); // True will log the string as well`
 
-## Coming Soon
-* Parameters added to output functions to also send messages to log files.
-    * Possible Example: `$this->error($text, $logFilePath, self::APPEND|self::OVERWRITE);`
-* Add ability to use more colors if wanted:
-    * Possible example: `$this->output('Some text to display', SCF\Styles\Output::BLUE);`
-* A storage directory for keeping anything from cache to command logs.
-    * I think it will ship with an empty directory structure and a starter log.
-    * when logs are written, it will be written like `scf-<date>.log`. Example: `../storage/logs/scf-20200604.log` (log for June 4th, 2020)
-        * Possible config to change the date structure on the files.
-        
+## Coming Soon     
 * Create a `config/` directory and keep config files for specific services, or for future add ons.
+* Create support for reading .env files so can create a .gitignored key/value pair file.
+* Build in Test support / some example tests testing the framework.

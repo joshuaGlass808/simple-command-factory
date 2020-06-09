@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App;
 
@@ -15,7 +15,7 @@ class Kernel
 	 * Register Commands here.
 	 */
 	const COMMANDS = [
-		ExampleCommand::class,
+		ExampleCommand::class
 	];
 
     /**
@@ -74,7 +74,7 @@ class Kernel
             $c = new $class;
             $s = '    ';
             print $s . $c->signature . "\n";
-            foreach ($c->cmdArgs() as $arg => $desc) {
+            foreach ($c->argumentMap as $arg => $desc) {
                 print $s . $s . $arg . ' : ' . $desc . "\n";
             }
             print "\n";

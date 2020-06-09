@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace SCF;
 
@@ -6,6 +6,9 @@ class Application
 {
     protected array $args = [];
 
+    /**
+     * Build Application.
+     */
     public function __construct(array $args)
     {
         $this->args = $args;
@@ -37,8 +40,9 @@ class Application
                 $command, 
                 \App\Kernel::class
             );
-            print $error;
-            // log $error; if $logRuns == true
+            (new \SCF\Shell\BaseCmd())->error($error, true);
+
+
             exit(3);
         }
         
