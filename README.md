@@ -1,4 +1,4 @@
-![SCF Tests](https://github.com/joshuaGlass808/simple-command-framework/workflows/SCF%20Tests/badge.svg?branch=master)
+![Build](https://github.com/joshuaGlass808/simple-command-framework/workflows/Build/badge.svg)
 
 # Simple Command Framework
 scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
