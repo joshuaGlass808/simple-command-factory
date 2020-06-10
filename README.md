@@ -3,7 +3,7 @@
 # Simple Command Framework
 scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
 This was inspired by Laravels Artisan command and the Symfony Command line packages as well. I set out to
-try and make my own cli helper (framework?), but with no dependencies outside of php. Due to that scf has missing features like bindings with ncurses or a graphing/loading library.
+try and make my own cli helper, but with no dependencies outside of php / testing. Due to that scf has missing features compared to large supported frameworks.
 
 ## Install:
 ```bash
