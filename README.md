@@ -76,10 +76,11 @@ class ExampleCommand extends BaseCmd implements CmdInterface
         $args = $this->getArgs();
         if ($args['show']) {
             $start = microtime(true);
-            $this->success($args['message'] . "\n");
+            $this->success("Message: {$args['message']}\n");
         }
+        $this->warn("Environment: {$this->env['ENV']}\n");
+        $this->warn("Config DB Driver: {$this->config['database-driver']}\n");
         $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextColor::CYAN);
-
     }
 }
 ```
@@ -120,6 +121,11 @@ $ ./scf -h
 Usage: ./scf <shell:signature> [--args=...]
        ./scf -h
 
+    create:shell
+        --path= : override default path (app/Commands/).
+        --shell-name= : Name of the Shell you wish to create.
+        --signature= : override default signature
+
     print:message
         --message= : Message to be printed
         --show : For boolean style flags, leave out the = at the end. Default is false unless used
@@ -141,8 +147,6 @@ Somethings that may not have been shown in the examples above:
     * `$this->error('String', true); // True will log the string as well`
 
 
-## Coming Soon     
-* Create a `config/` directory and keep config files for specific services, or for future add ons.
-* Create support for reading .env files so can create a .gitignored key/value pair file.
+## Coming Soon
 * A way to set command line arguments as required and some sort of type inforcer to some extent.
-* Build in Test support / some example tests testing the framework.
+* May create a new package called scf-application and move everything from src/ inside there. Then load it into scf/scf via composer require.

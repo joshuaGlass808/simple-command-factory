@@ -15,7 +15,7 @@ class Kernel
 	 * Register Commands here.
 	 */
 	const COMMANDS = [
-		ExampleCommand::class
+		ExampleCommand::class,
 	];
 
     /**
@@ -40,7 +40,7 @@ class Kernel
      * @param null|array $args  - Arguments passed with the command at run time.
      * @return null|BaseCmd     - Returns a Cmd class or null if not registered.
      */
-    public static function getCommandClass(string $signature, ?array $args): ?BaseCmd
+    public static function getCommandClass(string $signature, ?array $args, array $env, array $config): ?BaseCmd
     {
         $classes = self::classes();
         $classSignatures = [];
@@ -49,6 +49,8 @@ class Kernel
                 $cmd = (new $class);
                 if ($args !== null) {
                     $cmd->args = $args;
+                    $cmd->env = $env;
+                    $cmd->config = $config;
                 }
 				
                 return $cmd;

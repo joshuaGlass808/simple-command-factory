@@ -27,9 +27,10 @@ class ExampleCommand extends BaseCmd implements CmdInterface
         $args = $this->getArgs();
         if ($args['show']) {
             $start = microtime(true);
-            $this->success($args['message'] . "\n");
+            $this->success("Message: {$args['message']}\n");
+            $this->warn("Environment: {$this->env['ENV']}\n");
+            $this->warn("Config DB Driver: {$this->config['database-driver']}\n");
+            $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextColor::CYAN);
         }
-        $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextColor::CYAN);
-
     }
 }

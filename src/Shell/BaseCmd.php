@@ -8,19 +8,8 @@ use SCF\Styles\TextColor;
 class BaseCmd
 {
     public array $args = [];
-    protected array $config = [];
-    protected array $env = [];
-
-    public function __construct(array $paths = []) 
-    {
-        if (isset($paths['config'])) {
-            $this->config = $paths['config'];
-        }
-
-        if (isset($paths['env'])) {
-            $this->env = $paths['env'];
-        }
-    }
+    public array $config = [];
+    public array $env = [];
 
     /**
      * This method should be overwritten in shell if args are available
