@@ -1,5 +1,5 @@
 {
-    "name": "scf/scf",
+    "name": "scf/simple-command-framework",
     "type": "project",
     "homepage": "https://github.com/joshuaGlass808/php-cmd",
     "description": "The Simple Command Framework.",
