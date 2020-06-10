@@ -1,6 +1,6 @@
 <?php
 
-class AppTest extends \Orchestra\Testbench\TestCase
+class AppTest extends \PHPUnit\Framework\TestCase
 {
     public function testApplication(): void 
     {

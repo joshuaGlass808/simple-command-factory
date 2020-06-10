@@ -4,9 +4,11 @@
 [![Total Downloads](https://poser.pugx.org/scf/simple-command-framework/downloads)](//packagist.org/packages/scf/simple-command-framework)
 
 # Simple Command Framework
-scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
-This was inspired by Laravels Artisan command and the Symfony Command line packages as well. I set out to
-try and make my own cli helper, but with no dependencies outside of php / testing. Due to that scf has missing features compared to large supported frameworks.
+scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands, and enough features to get more small tasks completed. Feel free to create issues / contribute!.
+
+### Quick Highlight
+* I am using this in some current home projects I work on, so I will make sure to maintain package stablility starting at v1.0.0
+* This was inspired by Laravels Artisan command and the Symfony Command line packages as well.
 
 ## Install:
 ```bash
