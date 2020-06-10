@@ -1,4 +1,4 @@
-name: SCF Tests
+name: Build
 
 on:
   push:
