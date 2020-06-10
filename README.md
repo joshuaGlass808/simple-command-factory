@@ -1,4 +1,7 @@
 ![Build](https://github.com/joshuaGlass808/simple-command-framework/workflows/Build/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/scf/simple-command-framework/v)](//packagist.org/packages/scf/simple-command-framework)
+[![License](https://poser.pugx.org/scf/simple-command-framework/license)](//packagist.org/packages/scf/simple-command-framework)
+[![Total Downloads](https://poser.pugx.org/scf/simple-command-framework/downloads)](//packagist.org/packages/scf/simple-command-framework)
 
 # Simple Command Framework
 scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
