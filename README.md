@@ -7,6 +7,7 @@ try and make my own cli helper (framework?), but with no dependencies outside of
 
 ## Install:
 ```bash
+# composer create-project coming soon.
 git clone https://github.com/joshuaGlass808/simple-command-framework.git
 cd simple-command-framework/
 composer install
