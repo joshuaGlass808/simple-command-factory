@@ -1,7 +1,7 @@
 {
     "name": "scf/simple-command-framework",
     "type": "project",
-    "homepage": "https://github.com/joshuaGlass808/php-cmd",
+    "homepage": "https://github.com/joshuaGlass808/simple-command-framework",
     "description": "The Simple Command Framework.",
     "license": "MIT",
     "keywords": [
