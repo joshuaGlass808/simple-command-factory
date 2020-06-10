@@ -16,6 +16,8 @@ composer install
 After that, feel free to start creating commands:
 ```sh
 ./scf create:shell --shell-name='ExampleCommand' --signature='print:message'
+# or
+php scf create:shell --shell-name='ExampleCommand' --signature='print:message'
 ```
 Running the command above will result in this output:
 ```sh
