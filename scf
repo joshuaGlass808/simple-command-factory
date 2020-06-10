@@ -19,7 +19,7 @@ if ($argc < 2) {
 
 // Don't need the first element.
 $_ = array_shift($argv);
-$cmd = (new \SCF\Application($argv))
+$cmd = (new \SCF\CommandApplication($argv))
     ->run($isProd); 
 
 

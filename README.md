@@ -120,6 +120,11 @@ $ ./scf -h
 Usage: ./scf <shell:signature> [--args=...]
        ./scf -h
 
+    create:shell
+        --path= : override default path (app/Commands/).
+        --shell-name= : Name of the Shell you wish to create.
+        --signature= : override default signature
+
     print:message
         --message= : Message to be printed
         --show : For boolean style flags, leave out the = at the end. Default is false unless used

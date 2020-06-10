@@ -15,7 +15,7 @@ class Kernel
 	 * Register Commands here.
 	 */
 	const COMMANDS = [
-		ExampleCommand::class
+		ExampleCommand::class,
 	];
 
     /**

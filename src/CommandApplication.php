@@ -2,14 +2,14 @@
 
 namespace SCF;
 
-class Application
+class CommandApplication
 {
     protected array $args = [];
 
     /**
      * Build Application.
      */
-    public function __construct(array $args)
+    public function __construct(array $args = [])
     {
         $this->args = $args;
     }
@@ -28,12 +28,10 @@ class Application
             print "Options:\n    --help|-h : Display this help message.\n";
             exit(0);
         }
+
+        $args = (!empty($this->args)) ? $this->args : null;
         
-        if (count($this->args) === 0) {
-            $this->args = null;
-        }
-        
-        $class = \App\Kernel::getCommandClass($command, $this->args);
+        $class = \App\Kernel::getCommandClass($command, $args);
         if ($class === null) {
             $error = sprintf(
                 "The command: %s is not a valid command listed in the %s class or a valid option.\n", 
