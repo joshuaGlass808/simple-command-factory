@@ -7,9 +7,11 @@ try and make my own cli helper, but with no dependencies outside of php / testin
 
 ## Install:
 ```bash
-# composer create-project coming soon.
+composer create-project scf/simple-command-framework
+# or
 git clone https://github.com/joshuaGlass808/simple-command-framework.git
-cd simple-command-framework/
+
+# cd into project and run:
 composer install
 ```
 
