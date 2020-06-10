@@ -1,3 +1,5 @@
+![Unit Tests](https://github.com/joshuaGlass808/simple-command-framework/workflows/PHP%20Composer/badge.svg)
+
 # Simple Command Framework
 scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands.
 This was inspired by Laravels Artisan command and the Symfony Command line packages as well. I set out to
