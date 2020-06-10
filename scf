@@ -17,9 +17,28 @@ if ($argc < 2) {
     exit(2);
 }
 
-// Don't need the first element.
+$env = [];
+if (file_exists('.env')) {
+    $fp = fopen('.env', 'r');
+    $contents = fread($fp, filesize('.env'));
+    fclose($fp);
+    $unparsed = explode("\n", $contents);
+    foreach ($unparsed as $keyValueStr) {
+        list($key, $value) = explode('=', $keyValueStr);
+        $env[$key] = $value;
+    }
+
+    unset($unparsed, $contents);
+} else {
+    print 'Missing .env file.. Application will still run unless your application depends on it.';
+}
+
+$config = [];
+include 'config/config.php';
+
+// First element is irrelivant to us.
 $_ = array_shift($argv);
-$cmd = (new \SCF\CommandApplication($argv))
+$cmd = (new \SCF\CommandApplication($argv, $env, $config))
     ->run($isProd); 
 
 
