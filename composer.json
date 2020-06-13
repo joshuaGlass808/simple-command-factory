@@ -1,8 +1,8 @@
 {
-    "name": "scf/simple-command-framework",
+    "name": "scf/simple-command-factory",
     "type": "project",
-    "homepage": "https://github.com/joshuaGlass808/simple-command-framework",
-    "description": "The Simple Command Framework.",
+    "homepage": "https://github.com/joshuaGlass808/simple-command-factory",
+    "description": "The Simple Command Factory.",
     "license": "MIT",
     "keywords": [
         "framework",
