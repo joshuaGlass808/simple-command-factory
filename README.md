@@ -1,10 +1,10 @@
-![Build](https://github.com/joshuaGlass808/simple-command-framework/workflows/Build/badge.svg)
-[![Latest Stable Version](https://poser.pugx.org/scf/simple-command-framework/v)](//packagist.org/packages/scf/simple-command-framework)
-[![License](https://poser.pugx.org/scf/simple-command-framework/license)](//packagist.org/packages/scf/simple-command-framework)
-[![Total Downloads](https://poser.pugx.org/scf/simple-command-framework/downloads)](//packagist.org/packages/scf/simple-command-framework)
+![Build](https://github.com/joshuaGlass808/simple-command-factory/workflows/Build/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/scf/simple-command-factory/v)](//packagist.org/packages/scf/simple-command-factory)
+[![License](https://poser.pugx.org/scf/simple-command-factory/license)](//packagist.org/packages/scf/simple-command-factory)
+[![Total Downloads](https://poser.pugx.org/scf/simple-command-factory/downloads)](//packagist.org/packages/scf/simple-command-factory)
 
-# Simple Command Framework
-scf is a simple, small, lightweight command framework. It comes with a command to help boilerplate the creation of more commands, and enough features to get more small tasks completed. Feel free to create issues / contribute!.
+# Simple Command Factory
+scf is a simple, small, lightweight command factory. It comes with a command to help boilerplate the creation of more commands, and enough features to get more small tasks completed. Feel free to create issues / contribute!.
 
 ### Quick Highlight
 * I am using this in some current home projects I work on, so I will make sure to maintain package stablility starting at v1.0.0
@@ -12,12 +12,12 @@ scf is a simple, small, lightweight command framework. It comes with a command t
 
 ## Install:
 ```bash
-# composer create-project scf/simple-command-framework <app>
-composer create-project scf/simple-command-framework simple-command-framework
+# composer create-project scf/simple-command-factory <app>
+composer create-project scf/simple-command-factory simple-command-factory
 # or
-git clone https://github.com/joshuaGlass808/simple-command-framework.git
+git clone https://github.com/joshuaGlass808/simple-command-factory.git
 
-cd simple-command-framework/
+cd simple-command-factory/
 composer install
 ```
 
