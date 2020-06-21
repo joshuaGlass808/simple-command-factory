@@ -14,8 +14,11 @@ class AppTest extends \PHPUnit\Framework\TestCase
         $config = [
             'database-driver' => 'testing'
         ];
+
+        $kernel = new \App\Kernel();
+
         $app = (new \SCF\CommandApplication($command, $env, $config))
-            ->run(false); 
+            ->run($kernel, false); 
         
         $this->assertTrue($app);
     }

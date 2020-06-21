@@ -2,14 +2,14 @@
 
 namespace App\Commands;
 
-use SCF\Interfaces\CmdInterface;
-use SCF\Shell\BaseCmd;
-use SCF\Traits\CmdTrait;
-use SCF\Styles\TextColor;
+use SCF\Contracts\CommandContract;
+use SCF\Commands\BaseCommand;
+use SCF\Traits\CommandTrait;
+use SCF\Styles\TextStyle;
 
-class ExampleCommand extends BaseCmd implements CmdInterface
+class ExampleCommand extends BaseCommand implements CommandContract
 {
-    use CmdTrait;
+    use CommandTrait;
 
     public string $signature = 'print:message';
     public array $argumentMap = [
@@ -30,7 +30,7 @@ class ExampleCommand extends BaseCmd implements CmdInterface
             $this->success("Message: {$args['message']}\n");
             $this->warn("Environment: {$this->env['ENV']}\n");
             $this->warn("Config DB Driver: {$this->config['database-driver']}\n");
-            $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextColor::CYAN);
+            $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextStyle::CYAN);
         }
     }
 }
