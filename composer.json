@@ -12,12 +12,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "SCF\\": "src/"
+            "App\\": "app/"
         }
     },
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "scf/simple-command-framework": "^1.0"
     },
     "prefer-stable": true,
     "scripts": {

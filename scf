@@ -10,6 +10,9 @@
  */
 require_once 'vendor/autoload.php';
 
+use App\Kernel;
+use SCF\CommandApplication;
+
 $isProd = false;
 
 if ($argc < 2) {
@@ -38,7 +41,8 @@ include 'config/config.php';
 
 // First element is irrelivant to us.
 $_ = array_shift($argv);
-$cmd = (new \SCF\CommandApplication($argv, $env, $config))
-    ->run($isProd); 
+$kernel = new Kernel();
+$cmd = (new CommandApplication($argv, $env, $config))
+    ->run($kernel, $isProd); 
 
 
