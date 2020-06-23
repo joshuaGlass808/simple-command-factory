@@ -23,14 +23,14 @@ composer install
 
 After that, feel free to start creating commands:
 ```sh
-./scf create:shell --shell-name='ExampleCommand' --signature='print:message'
+./scf create:command --command-name='ExampleCommand' --signature='print:message'
 # or
-php scf create:shell --shell-name='ExampleCommand' --signature='print:message'
+php scf create:command --command-name='ExampleCommand' --signature='print:message'
 ```
 Running the command above will result in this output:
 ```sh
-Building file: simple-command-framework/app/Commands/ExampleCommand.php
-New class (test) create: simple-command-framework/app/Commands/ExampleCommand.php
+Building file: simple-command-factory/app/Commands/ExampleCommand.php
+New class (test) create: simple-command-factory/app/Commands/ExampleCommand.php
 Don't forget to add ExampleCommand to the App/Kernel class.
 ```
 Which creates a file like this:
@@ -39,13 +39,13 @@ Which creates a file like this:
 
 namespace App\Commands;
 
-use SCF\Interfaces\CmdInterface;
-use SCF\Shell\BaseCmd;
-use SCF\Traits\CmdTrait;
+use SCF\Contracts\CommandContract;
+use SCF\Commands\BaseCommand;
+use SCF\Traits\CommandTrait;
 
-class ExampleCommand extends BaseCmd implements CmdInterface
+class ExampleCommand extends BaseCommand implements CommandContract
 {
-    use CmdTrait;
+    use CommandTrait;
 
     public string $signature = 'print:message';
     public array $argumentMap = [];
@@ -64,10 +64,10 @@ Feel free to use it!
 
 namespace App\Commands;
 
-use SCF\Interfaces\CmdInterface;
-use SCF\Shell\BaseCmd;
-use SCF\Traits\CmdTrait;
-use SCF\Styles\TextColor;
+use SCF\Contracts\CommandContract;
+use SCF\Commands\BaseCommand;
+use SCF\Traits\CommandTrait;
+use SCF\Styles\TextStyle;
 
 class ExampleCommand extends BaseCmd implements CmdInterface
 {
@@ -93,7 +93,7 @@ class ExampleCommand extends BaseCmd implements CmdInterface
         }
         $this->warn("Environment: {$this->env['ENV']}\n");
         $this->warn("Config DB Driver: {$this->config['database-driver']}\n");
-        $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextColor::CYAN);
+        $this->output('Execution took: ' . (microtime(true) - $start) . " seconds\n", TextStyle::CYAN);
     }
 }
 ```
@@ -104,19 +104,19 @@ use App\Commands\ExampleCommand;
 ```
 ...
 ```php
-    public static function classes(): array
-    {
-        return [
-            ExampleCommand::class,
-        ];
-    }
+	/**
+	 * Register your Commands here.
+	 */
+	const COMMANDS = [
+		ExampleCommand::class,
+	];
 ```
 
 ## Example usage:
 ```sh
 ./scf -h
 ./scf --help
-./scf create:shell --shell-name='DesktopImageRotator'
+./scf create:command --command-name='DesktopImageRotator'
 
 ./scf print:message --message='hello world' --show
 #
@@ -136,8 +136,8 @@ Usage: ./scf <shell:signature> [--args=...]
 
     create:shell
         --path= : override default path (app/Commands/).
-        --shell-name= : Name of the Shell you wish to create.
-        --signature= : override default signature
+        --command-name= : Name of the command class you wish to create.
+        --signature= : set the signature
 
     print:message
         --message= : Message to be printed
@@ -162,6 +162,3 @@ Somethings that may not have been shown in the examples above:
 
 ## Coming Soon
 * A way to set command line arguments as required and some sort of type inforcer to some extent.
-* May create a new package called scf-application and move everything from src/ inside there. Then load it into scf/scf via composer require.
-
-
