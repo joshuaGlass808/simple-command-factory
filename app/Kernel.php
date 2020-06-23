@@ -14,10 +14,12 @@ use SCF\Commands\{
 class Kernel implements KernelContract
 {
     use KernelTrait;
+
 	/**
 	 * Register your Commands here.
 	 */
 	const COMMANDS = [
+        CreateCommand::class,
 		ExampleCommand::class,
 	];
 
@@ -30,10 +32,7 @@ class Kernel implements KernelContract
      */
     public static function classes(): array
     {
-		$commands = self::COMMANDS;
-		$commands[] = CreateCommand::class;
-		
-		return $commands;
+		return self::COMMANDS;
     }
 	
     /**
@@ -48,16 +47,18 @@ class Kernel implements KernelContract
         $classes = self::classes();
         $classSignatures = [];
         foreach ($classes as $class) {	    
-            if ((new $class)->signature === $signature) {
-                $cmd = (new $class);
-                if ($args !== null) {
-                    $cmd->args = $args;
-                    $cmd->env = $env;
-                    $cmd->config = $config;
-                }
-				
-                return $cmd;
+            if ((new $class)->signature !== $signature) {
+                continue;
             }
+
+            $cmd = (new $class);
+            if ($args !== null) {
+                $cmd->args = $args;
+                $cmd->env = $env;
+                $cmd->config = $config;
+            }
+				
+            return $cmd;
         }
         
         return null;

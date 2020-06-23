@@ -163,3 +163,5 @@ Somethings that may not have been shown in the examples above:
 ## Coming Soon
 * A way to set command line arguments as required and some sort of type inforcer to some extent.
 * May create a new package called scf-application and move everything from src/ inside there. Then load it into scf/scf via composer require.
+
+
