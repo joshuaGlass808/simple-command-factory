@@ -69,9 +69,9 @@ use SCF\Commands\BaseCommand;
 use SCF\Traits\CommandTrait;
 use SCF\Styles\TextStyle;
 
-class ExampleCommand extends BaseCmd implements CmdInterface
+class ExampleCommand extends BaseCommand implements CommandContract
 {
-    use CmdTrait;
+    use CommandTrait;
 
     public string $signature = 'print:message';
     public array $argumentMap = [
@@ -126,15 +126,15 @@ use App\Commands\ExampleCommand;
 ./scf print:message --message='hello world'
 
 ```
-Once you register that new shells in the Kernel you will be able to see them inside of the help message
+Once you register that new commands in the Kernel you will be able to see them inside of the help message
 
 ## Example help:
 ```sh
 $ ./scf -h
-Usage: ./scf <shell:signature> [--args=...]
+Usage: ./scf <command:signature> [--args=...]
        ./scf -h
 
-    create:shell
+    create:command
         --path= : override default path (app/Commands/).
         --command-name= : Name of the command class you wish to create.
         --signature= : set the signature
