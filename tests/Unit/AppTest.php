@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 class AppTest extends \PHPUnit\Framework\TestCase
 {
